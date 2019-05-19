@@ -6,10 +6,44 @@ import { first } from 'rxjs/operators';
 import { AlertService} from '../services/alert.service';
 import { AuthenticationService} from '../services/authentication.service';
 import { UserService} from '../services/user.service';
+import { VERSION, MatDialogRef, MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  styles: [
+    `
+      :host {
+        display: flex;
+        justify-content: center;
+        margin: 100px 0px;
+      }
+
+      .mat-form-field {
+        width: 100%;
+        min-width: 300px;
+      }
+
+      mat-card-title,
+      mat-card-content {
+        display: flex;
+        justify-content: center;
+      }
+
+      .error {
+        padding: 16px;
+        width: 300px;
+        color: white;
+        background-color: red;
+      }
+
+      .button {
+        display: flex;
+        justify-content: flex-end;
+      }
+    `,
+  ],
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
@@ -20,7 +54,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private dialog: MatDialog
 ){
 
     // // redirect to home if already logged in
@@ -62,6 +97,11 @@ onSubmit() {
             error => {
                 this.alertService.error(error);
                 this.loading = false;
+            
             });
 }
+GoToLoginPage(){
+  this.router.navigate(['/login']);
+}
+
 }
