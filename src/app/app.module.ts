@@ -17,7 +17,7 @@ import { JwtInterceptor } from '../app/helper/jwt.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CdkTableModule} from '@angular/cdk/table';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AlertDialogComponent } from '../app/components/alert-dialog.component';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,

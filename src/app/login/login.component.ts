@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
-
+    LoginServerErrorMessage:string;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
+        this.LoginServerErrorMessage="";
         // stop here if form is invalid
         if (this.loginForm.invalid) {
             return;
@@ -91,8 +91,9 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error(error.error.message);
                     this.loading = false;
+                    this.LoginServerErrorMessage=error.error.message;
                 });
     }
 }

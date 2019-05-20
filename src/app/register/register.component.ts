@@ -49,6 +49,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
     loading = false;
     submitted = false;
+    RegisterServerErrorMessage:string;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -79,7 +80,7 @@ get f() { return this.registerForm.controls; }
 
 onSubmit() {
     this.submitted = true;
-
+    this.RegisterServerErrorMessage="";
     // stop here if form is invalid
     if (this.registerForm.invalid) {
         return;
@@ -95,9 +96,9 @@ onSubmit() {
                 this.loading = false;
             },
             error => {
-                this.alertService.error(error);
+                this.alertService.error(error.error.message);
                 this.loading = false;
-            
+                this.RegisterServerErrorMessage=error.error.message;
             });
 }
 GoToLoginPage(){
